@@ -1,13 +1,14 @@
 FROM golang:1.16.2-alpine as build
 
-WORKDIR /go/src/app
+WORKDIR /Users
 
 COPY . .
 
-RUN go run -o main ./main.go
+RUN mkdir /app
+WORKDIR /app
 
 FROM alpine
 WORKDIR /app
-COPY --from=build /go/src/app/ /app/
+COPY --from=build /Users/api .
 
-CMD ["/app/main"]
+CMD ["./Users"]
